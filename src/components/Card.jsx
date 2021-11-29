@@ -26,6 +26,15 @@ const CardProdutoImg=styled.img`
 width: 100%;
 height: 200px;
 `
+const BotaoAdicionarCarrinho=styled.button`
+margin-top: 8px;
+width: 85%;
+padding: 0.5rem 0px;
+border-radius: 5px;
+border: 1px solid rgb(240, 194, 68);
+background-color: rgb(255, 255, 255);
+cursor:pointer;
+`
 export default class App extends React.Component {
 
 render ()  {
@@ -33,10 +42,12 @@ render ()  {
     return(
         <div>
            <CardProduto>
-              <CardProdutoImg src={`https://picsum.photos/400/400?a=${this.props.numeroDaImagem}`}
+              <CardProdutoImg src={this.props.linkImagem}
                 alt={this.props.tituloDoVideo} />
               <PainelProdutosh4>{this.props.tituloDoVideo}</PainelProdutosh4>
+              <BotaoAdicionarCarrinho>Adicionar ao Carrinho</BotaoAdicionarCarrinho>
               <PainelProdutosh3>{this.props.preco}</PainelProdutosh3>
+
             </CardProduto>
 
         </div>
