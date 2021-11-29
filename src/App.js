@@ -29,6 +29,7 @@ const MnuVertical = styled.details`
     border-right-width: thin;
     width:150px;
     margin: 0px 10px;
+    text-align:center;
 `
 
 const PainelProdutos = styled.section`
