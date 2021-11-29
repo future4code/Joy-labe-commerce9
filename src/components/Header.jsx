@@ -25,10 +25,9 @@ background-color: rgb(60, 19, 153);
   padding-top:0;
   padding-bottom:0;
   height: 10%;
+
 `
-const Link = styled.a`
-color: black;
-`
+
 const ImgTela = styled.img`
 height: 35px;
 

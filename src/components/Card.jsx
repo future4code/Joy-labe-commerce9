@@ -11,6 +11,7 @@ border-width: thin;
 align-items: start;
 justify-items: center;
 box-shadow: rgb(163 163 163) 2px 2px 5px;
+
 `
 const PainelProdutosh3=styled.h3`
 display: flex;
@@ -28,6 +29,7 @@ height: 200px;
 `
 const BotaoAdicionarCarrinho=styled.button`
 margin-top: 8px;
+margin-bottom:10px;
 width: 85%;
 padding: 0.5rem 0px;
 border-radius: 5px;
@@ -45,9 +47,9 @@ render ()  {
               <CardProdutoImg src={this.props.linkImagem}
                 alt={this.props.tituloDoVideo} />
               <PainelProdutosh4>{this.props.tituloDoVideo}</PainelProdutosh4>
-              <BotaoAdicionarCarrinho>Adicionar ao Carrinho</BotaoAdicionarCarrinho>
+             
               <PainelProdutosh3>{this.props.preco}</PainelProdutosh3>
-
+              <BotaoAdicionarCarrinho>Adicionar ao Carrinho</BotaoAdicionarCarrinho>
             </CardProduto>
 
         </div>

@@ -27,7 +27,7 @@ const MnuVertical = styled.details`
     justify-content:space-between;
     border-right-style: solid;
     border-right-width: thin;
-    width:150px;
+    width:250px;
     margin: 0px 10px;
     text-align:center;
 `
@@ -42,7 +42,24 @@ column-gap: 10px;
 color: black;
 margin:10px;
 `
-
+const Filter = styled.summary`
+text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 1rem;
+    list-style: none;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+`
+const BotoesMnuVertical = styled.h3`
+list-style-type: none;
+  color:black;
+`
+const ImgTela = styled.img`
+height: 25px;
+margin-top: 25px;
+`
 export default function App() {
 
 
@@ -53,6 +70,10 @@ export default function App() {
       <Ordenacao/>
         <Principal>
           <MnuVertical>
+          <Filter>
+					<ImgTela src="https://pt.seaicons.com/wp-content/uploads/2015/11/filter-icon.png" />
+					<BotoesMnuVertical>Filtro</BotoesMnuVertical>
+				</Filter>
             <Filtro>
             
             </Filtro>

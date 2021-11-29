@@ -8,9 +8,10 @@ color:white`
 const Footer=styled.footer`
 background: rgb(60, 19, 153);
   color: black;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+ position:relative;
+  top:60%;
+bottom:0;
+  width: 98.5%;
   display: flex;
   justify-content:center;
   padding: 0 10px;
