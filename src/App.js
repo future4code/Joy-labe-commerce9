@@ -42,48 +42,104 @@ column-gap: 10px;
 color: black;
 margin:10px;
 `
+const naves = [
+  {
+    id: 1,
+    name: 'Milano',
+    value: 100000,
+    imageUrl: 'https://3.bp.blogspot.com/-LiIBwWqp4Ek/U-GeoiNXvyI/AAAAAAAABwo/YCVHpesRkTM/s1600/81J1NrFjYoL._SL1500_.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 2,
+    name: 'Nave Megalodon',
+    value: 1200000,
+    imageUrl: 'http://astro-rockets.surge.sh/static/media/06_nave_megalodon.2e95d729.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 3,
+    name: 'Nave Classic',
+    value: 3500000,
+    imageUrl: 'http://astro-rockets.surge.sh/static/media/05_nave_classic.e5b4aa75.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 4,
+    name: 'Foguete Junior',
+    value: 400000,
+    imageUrl: 'http://astro-rockets.surge.sh/static/media/03_foguete_junior.d266e8ac.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 5,
+    name: 'Foguete Single',
+    value: 400000,
+    imageUrl: 'http://astro-rockets.surge.sh/static/media/01_foguete_single.8f1bf138.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 6,
+    name: 'Foguete Blaster',
+    value: 400000,
+    imageUrl: 'http://astro-rockets.surge.sh/static/media/04_foguete_blaster.45811de2.jpg',
+    quantidade: 0,
+  },
+];
 
-export default function App() {
+export default class App extends React.Component {
+  state = {
+    carrinho: [],
+    precoMinimo: "",
+    precoMaximo: Infinity,
+    sortingParameter: "crescente",
+    order: 1,
+    inputBusca: '',
+    remover: '',
+    itemNovo: '',
+  };
+
+  render() {
+
+    return (
+      <Corpo>
+
+        <Tela>
+          <Header>
+
+          </Header>
+          <Ordenacao />
+
+          <Principal>
+
+            <MnuVertical>
+
+              <Filter>
+                <ImgTela src="https://pt.seaicons.com/wp-content/uploads/2015/11/filter-icon.png" />
+                <BotoesMnuVertical>Filtro</BotoesMnuVertical>
+              </Filter>
+              <Filtro>
+
+              </Filtro>
+            </MnuVertical>
 
 
-  return (
-    <Corpo>
-      <Tela>
-     <Header/>
-      <Ordenacao/>
-        <Principal>
-          <MnuVertical>
-            <Filtro>
-            
-            </Filtro>
-          </MnuVertical>
+            <PainelProdutos>
+              {naves.map((card) =>
+                <Card name={card.name}
+                  imageUrl={card.imageUrl}
+                  value={card.value} />
+              )}
 
-          <PainelProdutos>
+            </PainelProdutos>
 
-            <Card linkImagem={'https://istoe.com.br/wp-content/uploads/sites/14/istoeimagens/imagens/mi_1846228370645925.jpg'} tituloDoVideo={"Traje espacial"} preco={29.99}>
 
-            </Card>
-            <Card linkImagem={'http://astro-rockets.surge.sh/static/media/06_nave_megalodon.2e95d729.jpg'} tituloDoVideo={"Nave Megalodon"} preco={29.99}>
+          </Principal>
+          <Footer></Footer>
+        </Tela>
+      </Corpo>
+    )
+  }
 
-            </Card>
-            <Card linkImagem={'http://astro-rockets.surge.sh/static/media/05_nave_classic.e5b4aa75.jpg'} tituloDoVideo={"Nave Classic"} preco={29.99}>
-
-            </Card>
-            <Card linkImagem={'http://astro-rockets.surge.sh/static/media/03_foguete_junior.d266e8ac.jpg'} tituloDoVideo={"Foguete Junior"} preco={29.99} >
-
-            </Card>
-            <Card linkImagem={'http://astro-rockets.surge.sh/static/media/01_foguete_single.8f1bf138.jpg'} tituloDoVideo={'Foguete Single'} preco={29.99}>
-
-            </Card>
-            <Card linkImagem={'http://astro-rockets.surge.sh/static/media/04_foguete_blaster.45811de2.jpg'} tituloDoVideo={"Foguete Blaster"} preco={29.99}>
-
-            </Card>
-
-          </PainelProdutos>
-        </Principal>
-
-        <Footer></Footer>
-      </Tela>
-    </Corpo>
-  );
 }
+

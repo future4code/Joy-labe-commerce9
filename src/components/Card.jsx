@@ -42,12 +42,11 @@ render ()  {
     return(
         <div>
            <CardProduto>
-              <CardProdutoImg src={this.props.linkImagem}
-                alt={this.props.tituloDoVideo} />
-              <PainelProdutosh4>{this.props.tituloDoVideo}</PainelProdutosh4>
+              <CardProdutoImg src={this.props.imageUrl}
+                alt={this.props.tituloNave} />
+              <PainelProdutosh4>{this.props.name}</PainelProdutosh4>
+              <PainelProdutosh3>{this.props.value}</PainelProdutosh3>
               <BotaoAdicionarCarrinho>Adicionar ao Carrinho</BotaoAdicionarCarrinho>
-              <PainelProdutosh3>{this.props.preco}</PainelProdutosh3>
-
             </CardProduto>
 
         </div>
