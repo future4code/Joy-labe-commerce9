@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 const CardProduto =styled.div`
 display: grid;
 grid-template-rows: 3fr 1fr;
@@ -45,9 +46,8 @@ render ()  {
         <div>
            <CardProduto>
               <CardProdutoImg src={this.props.linkImagem}
-                alt={this.props.tituloDoVideo} />
-              <PainelProdutosh4>{this.props.tituloDoVideo}</PainelProdutosh4>
-             
+                alt={this.props.tituloNave} />
+              <PainelProdutosh4>{this.props.tituloNave}</PainelProdutosh4>
               <PainelProdutosh3>{this.props.preco}</PainelProdutosh3>
               <BotaoAdicionarCarrinho>Adicionar ao Carrinho</BotaoAdicionarCarrinho>
             </CardProduto>
