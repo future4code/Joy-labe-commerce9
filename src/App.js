@@ -62,42 +62,42 @@ const naves = [
   {
     id: 1,
     name: 'Milano',
-    value: 100000,
+    value: 100.000,
     imageUrl: 'https://3.bp.blogspot.com/-LiIBwWqp4Ek/U-GeoiNXvyI/AAAAAAAABwo/YCVHpesRkTM/s1600/81J1NrFjYoL._SL1500_.jpg',
     quantidade: 0,
   },
   {
     id: 2,
     name: 'Nave Megalodon',
-    value: 1200000,
+    value: 1200.000,
     imageUrl: 'http://astro-rockets.surge.sh/static/media/06_nave_megalodon.2e95d729.jpg',
     quantidade: 0,
   },
   {
     id: 3,
     name: 'Nave Classic',
-    value: 3500000,
+    value: 3500.000,
     imageUrl: 'http://astro-rockets.surge.sh/static/media/05_nave_classic.e5b4aa75.jpg',
     quantidade: 0,
   },
   {
     id: 4,
     name: 'Foguete Junior',
-    value: 400000,
+    value: 200.000,
     imageUrl: 'http://astro-rockets.surge.sh/static/media/03_foguete_junior.d266e8ac.jpg',
     quantidade: 0,
   },
   {
     id: 5,
     name: 'Foguete Single',
-    value: 400000,
+    value: 300.000,
     imageUrl: 'http://astro-rockets.surge.sh/static/media/01_foguete_single.8f1bf138.jpg',
     quantidade: 0,
   },
   {
     id: 6,
     name: 'Foguete Blaster',
-    value: 400000,
+    value: 500.000,
     imageUrl: 'http://astro-rockets.surge.sh/static/media/04_foguete_blaster.45811de2.jpg',
     quantidade: 0,
   },
@@ -143,7 +143,7 @@ buscaNome=(e)=>{
               }).map((nave) =>
                 <Card name={nave.name}
                   imageUrl={nave.imageUrl}
-                  value={nave.value} />
+                  value={"R$"+nave.value} />
               )}
 
             </PainelProdutos>

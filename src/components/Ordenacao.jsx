@@ -25,7 +25,6 @@ export default class App extends React.Component {
 				<Select>
 					<option>Preço - Decrescente</option>
 					<option>Preço - Crescente</option>
-					<option>Populares</option>
 				</Select>
 
 			</Order>
