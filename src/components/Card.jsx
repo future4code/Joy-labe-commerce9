@@ -28,6 +28,7 @@ height: 200px;
 `
 const BotaoAdicionarCarrinho=styled.button`
 margin-top: 8px;
+margin-bottom: 10px;
 width: 85%;
 padding: 0.5rem 0px;
 border-radius: 5px;
