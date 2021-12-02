@@ -6,7 +6,7 @@ import Filtro from './components/Filtro'
 import Footer from './components/Footer'
 import Ordenacao from './components/Ordenacao'
 
-const Corpo = styled.body`
+const Corpo = styled.div`
 width: 100%;
 padding: 0;
 margin: 0;
@@ -14,13 +14,10 @@ margin: 0;
 const Tela = styled.div` height: 100vh;
 display: flex;
 flex-direction: column;`
-
 const Principal = styled.main`
 min-height: 80%;
 display: flex;`
-
 const MnuVertical = styled.details`
-
   display: flex;
     flex-direction: row;
     -webkit-box-pack: justify;
@@ -28,10 +25,10 @@ const MnuVertical = styled.details`
     border-right-style: solid;
     border-right-width: thin;
     width:150px;
+    width:250px;
     margin: 0px 10px;
     text-align:center;
 `
-
 const PainelProdutos = styled.section`
 flex-grow: 1;
 display: grid;
@@ -41,6 +38,25 @@ row-gap: 10px;
 column-gap: 10px;
 color: black;
 margin:10px;
+`
+
+const Filter = styled.summary`
+text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 1rem;
+    list-style: none;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+`
+const BotoesMnuVertical = styled.h3`
+list-style-type: none;
+  color:black;
+`
+const ImgTela = styled.img`
+height: 25px;
+margin-top: 25px;
 `
 const naves = [
   {
@@ -85,54 +101,52 @@ const naves = [
     imageUrl: 'http://astro-rockets.surge.sh/static/media/04_foguete_blaster.45811de2.jpg',
     quantidade: 0,
   },
-];
+]
 
 export default class App extends React.Component {
-  state = {
-    carrinho: [],
-    precoMinimo: "",
-    precoMaximo: Infinity,
-    sortingParameter: "crescente",
-    order: 1,
-    inputBusca: '',
-    remover: '',
-    itemNovo: '',
-  };
+  state={
+        query:""
+        
+      }
+
+buscaNome=(e)=>{
+  this.setState({query: e.target.value})
+}
 
   render() {
 
     return (
       <Corpo>
-
         <Tela>
-          <Header>
-
-          </Header>
+         
+          <Header query={this.state.query} buscaNome={this.buscaNome}/>
+           
+         
+         
           <Ordenacao />
-
+         
           <Principal>
-
-            <MnuVertical>
-
-              <Filter>
-                <ImgTela src="https://pt.seaicons.com/wp-content/uploads/2015/11/filter-icon.png" />
-                <BotoesMnuVertical>Filtro</BotoesMnuVertical>
-              </Filter>
-              <Filtro>
-
-              </Filtro>
+            <MnuVertical>    
+         
+            <Filter>
+					<ImgTela src="https://pt.seaicons.com/wp-content/uploads/2015/11/filter-icon.png" />
+					<BotoesMnuVertical>Filtro</BotoesMnuVertical>
+				</Filter>
+            <Filtro>
+            </Filtro>
+        
             </MnuVertical>
 
-
             <PainelProdutos>
-              {naves.map((card) =>
-                <Card name={card.name}
-                  imageUrl={card.imageUrl}
-                  value={card.value} />
+              {naves.filter(nave=>{
+              return nave.name.toLowerCase().includes(this.state.query.toLowerCase())
+              }).map((nave) =>
+                <Card name={nave.name}
+                  imageUrl={nave.imageUrl}
+                  value={nave.value} />
               )}
 
             </PainelProdutos>
-
 
           </Principal>
           <Footer></Footer>
