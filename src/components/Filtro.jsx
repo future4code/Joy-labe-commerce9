@@ -32,8 +32,8 @@ export default class App extends React.Component {
 				<Filtro>
 					
 				</Filtro>
-				<Inputfilter type="number" placeholder="Preço Mínimo" id="campoDeFiltroMinimo" />
-				<Inputfilter type="number" placeholder="Preço Máximo" id="campoDeFiltroMaximo" />
+				<Inputfilter type="number" placeholder="Preço Mínimo" id="campoDeFiltroMinimo" value={this.props.minPrice} onChange={this.props.precoMinimo}/>
+				<Inputfilter type="number" placeholder="Preço Máximo" id="campoDeFiltroMaximo"  value={this.props.maxPrice} onChange={this.props.precoMaximo}/>
 				<p>Limpar</p>
 			</Corpo>
 

@@ -37,19 +37,47 @@ right: 170px;
 top: 1px;
 width: 2%;`
 
+const TotalItens = styled.p`
+  position: absolute;
+  top:0px;
+  right: 3.5rem;
+  background-color: #ff671c;
+  border-radius: 100%;
+  color: #ffffff;
+  font-weight: 100;
+  font-size: 14px;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  @media (max-width: 800px) {
+    right: 0.16rem;
+    top: 10px;
+    width: 20px;
+    heidht: 20px;
+  }
+`;
+
 export default class App extends React.Component {
 	
 	render() {
 
-		return (
+	  if (this.props.paginaProdutos){	return (
 			<Header>
 				<H1Tela>LabEcommerce</H1Tela>
 				<Inputheader type="text" placeholder="Pesquisar..." value={this.props.query} onChange={this.props.buscaNome}  id="campoDeBusca" />
 				<Lupa src="http://astro-rockets.surge.sh/static/media/search_black_24dp.03bb87e7.svg"/>
-				<ImgTela alt="Carrinho" src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Font_Awesome_5_solid_shopping-cart.svg" />
+				<TotalItens>{this.props.totalItens}</TotalItens>
+				<ImgTela onClick={this.props.paginaCarrinho} alt="Carrinho" src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Font_Awesome_5_solid_shopping-cart.svg" />
 
 			</Header>
-		)
-
+		)}else{
+      return(
+      <Header>
+      <H1Tela onClick={this.props.paginaCarrinho}>LabEcommerce</H1Tela>
+      <Inputheader type="text" placeholder="Pesquisar..." id="campoDeBusca" />
+    </Header>
+      )
+    }
+      
 	}
 }
