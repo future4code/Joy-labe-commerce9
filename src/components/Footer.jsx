@@ -23,7 +23,7 @@ export default class App extends React.Component {
 
 		return (
 			<Footer>
-				<Footerh4>Siga as nossas redes sociais!</Footerh4>
+				<Footerh4>Volte sempre!</Footerh4>
 				
 			</Footer>
 		)

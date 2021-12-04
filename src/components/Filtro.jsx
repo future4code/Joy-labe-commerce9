@@ -26,7 +26,8 @@ justify-content:start;
 align-items:center;
 width:200px;
 `
-
+const Clear=styled.p`
+cursor:pointer;`
 export default class App extends React.Component {
 
 	render() {
@@ -36,9 +37,9 @@ export default class App extends React.Component {
 				<Filtro>
 					
 				</Filtro>
-				<Inputfilter type="number" placeholder="Preço Mínimo" id="campoDeFiltroMinimo" value={this.props.minPrice} onChange={this.props.precoMinimo}/>
-				<Inputfilter type="number" placeholder="Preço Máximo" id="campoDeFiltroMaximo" value2={this.props.maxPrice} onChange={this.props.precoMaximo}/>
-				<p>Limpar</p>
+				<Inputfilter type="number" placeholder="Preço Mínimo" id="campoDeFiltroMinimo" value={this.props.minPrice} onChange={this.props.updateMinPrice}/>
+				<Inputfilter type="number" placeholder="Preço Máximo" id="campoDeFiltroMaximo" value2={this.props.maxPrice} onChange={this.props.updateMaxPrice}/>
+				<Clear onClick={() => this.props.limparFiltro()}>Limpar</Clear>
 			</Corpo>
 
 

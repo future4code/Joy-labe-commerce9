@@ -63,44 +63,44 @@ const naves = [
   {
     id: 1,
     name: 'Milano',
-    value: 100000,
+    value: Number(25.0).toFixed(2),
     imageUrl: 'https://3.bp.blogspot.com/-LiIBwWqp4Ek/U-GeoiNXvyI/AAAAAAAABwo/YCVHpesRkTM/s1600/81J1NrFjYoL._SL1500_.jpg',
-    quantidade: 0,
+    descricao:"O Milano é uma nave Ravager M e a principal espaçonave usada pelos Guardiões da Galáxia para voos interestelares para os mundos."
   },
   {
     id: 2,
     name: 'Nave Megalodon',
-    value: 1200000,
+    value: Number(59.9).toFixed(2),
     imageUrl: 'http://astro-rockets.surge.sh/static/media/06_nave_megalodon.2e95d729.jpg',
-    quantidade: 0,
+    descricao:"Robusta, comporta grupos de até 50 pessoas confortavelmente!"
   },
   {
     id: 3,
     name: 'Nave Classic',
-    value: 3500000,
+    value: Number(49.0).toFixed(2),
     imageUrl: 'http://astro-rockets.surge.sh/static/media/05_nave_classic.e5b4aa75.jpg',
-    quantidade: 0,
+    descricao:"Visual clássico, com tecnologia de ponta!"
   },
   {
     id: 4,
     name: 'Foguete Junior',
-    value: 400000,
+    value: Number(20.0).toFixed(2),
     imageUrl: 'http://astro-rockets.surge.sh/static/media/03_foguete_junior.d266e8ac.jpg',
-    quantidade: 0,
+    descricao:"É ideal para o transporte de família com até 4 membros. Econômico e veloz!"
   },
   {
     id: 5,
     name: 'Foguete Single',
-    value: 400000,
+    value: Number(30.0).toFixed(2),
     imageUrl: 'http://astro-rockets.surge.sh/static/media/01_foguete_single.8f1bf138.jpg',
-    quantidade: 0,
+    descricao:"É ideal para o transporte de apenas um passageiro. Econômico e veloz"
   },
   {
     id: 6,
     name: 'Foguete Blaster',
-    value: 400000,
+    value:Number(40.0).toFixed(2),
     imageUrl: 'http://astro-rockets.surge.sh/static/media/04_foguete_blaster.45811de2.jpg',
-    quantidade: 0,
+    descricao:"Comporta até 5 passageiros em uma viagem extremamente veloz!"
   },
 ]
 
@@ -111,7 +111,7 @@ export default class App extends React.Component {
  carrinho:[],
         naves:naves,
           minPrice: "",
-          maxPrice: "", 
+          maxPrice: Infinity, 
       }
 
 buscaNome=(e)=>{
@@ -129,12 +129,13 @@ updateMaxPrice = (ev) => {
      maxPrice: ev.target.value
   })
 }
- state={
-        query:"",
-        paginaPrincipal:true,
-        carrinho:[],
-        naves:naves,
-      }
+limparFiltro = () => {
+  this.setState({
+    minPrice: "",
+    maxPrice: Infinity,
+  });
+};
+
       paginaCarrinho = () => {
         this.setState({ paginaPrincipal: !this.state.paginaPrincipal });
       };
@@ -243,6 +244,7 @@ render(){
             updateMaxPrice={this.updateMaxPrice}
             minPrice={this.state.minPrice}
             maxPrice={this.state.maxPrice}
+            limparFiltro={this.limparFiltro}
                         />
             
 
@@ -251,7 +253,12 @@ render(){
             <PainelProdutos>
               {naves.filter(nave=>{
               return nave.name.toLowerCase().includes(this.state.query.toLowerCase())
-              }).map((nave) =>
+              }).filter(nave => {
+                return this.state.minPrice === "" || nave.value >= this.state.minPrice
+             })
+             .filter(nave => {
+                return this.state.maxPrice === "" || nave.value <= this.state.maxPrice
+             }).map((nave) =>
                 <Card name={nave.name}
                     alt={nave.name}
                   imageUrl={nave.imageUrl}
