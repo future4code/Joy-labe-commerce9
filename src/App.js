@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Filtro from './components/Filtro'
 import Footer from './components/Footer'
 import Ordenacao from './components/Ordenacao'
+import Carrinho from './components/Carrinho/Carrinho'
 
 const Corpo = styled.div`
 width: 100%;
@@ -106,6 +107,9 @@ const naves = [
 export default class App extends React.Component {
   state={
         query:"" ,
+ paginaPrincipal:true,
+ carrinho:[],
+        naves:naves,
           minPrice: "",
           maxPrice: "", 
       }
@@ -125,15 +129,105 @@ updateMaxPrice = (ev) => {
      maxPrice: ev.target.value
   })
 }
+ state={
+        query:"",
+        paginaPrincipal:true,
+        carrinho:[],
+        naves:naves,
+      }
+      paginaCarrinho = () => {
+        this.setState({ paginaPrincipal: !this.state.paginaPrincipal });
+      };
+      
+buscaNome=(e)=>{
+  this.setState({query: e.target.value})
+}
+adicionarProduto = (id) => {
+  const itemCarrinho = this.state.carrinho.find(
+    (nave) => id === nave.id
+  );
+  if (itemCarrinho) {
+    const novoCarrinho = this.state.carrinho.map((nave) => {
+      if (id === nave.id) {
+        return {
+          ...nave,
+          quantidade: nave.quantidade + 1,
+        };
+      }
+      return nave;
+    });
+    this.setState({ carrinho: novoCarrinho });
+  } else {
+    const itemParaAdicionar = this.state.naves.find(
+      (nave) => id === nave.id
+    );
+    const carrinhoAtual = [
+      ...this.state.carrinho,
+      { ...itemParaAdicionar, quantidade: 1 },
+    ];
+    this.setState({ carrinho: carrinhoAtual });
+  }
+};
 
-  render() {
+removerProduto = (id) => {
+  const retirarItem = [...this.state.carrinho];
+  const item = retirarItem.filter((nave) => {
+    return nave.id !== id;
+  });
+  this.setState({ carrinho: item });
+};
 
+// Funções para aumentar ou diminuir a quantidade de naves no carrinho
+adicionarQuantidade = (item) => {
+  const carrinhoAtual = this.state.carrinho.map((nave) => {
+    if (item.id === nave.id) {
+      return {
+        ...item,
+        quantidade: nave.quantidade + 1,
+      };
+    }
+    return nave;
+  });
+  this.setState({ carrinho: carrinhoAtual });
+};
+
+diminuirQuantidade = (item) => {
+  const carrinhoAtual = this.state.carrinho.map((nave) => {
+    if (item.id === nave.id && nave.quantidade > 1) {
+      return {
+        ...item,
+        quantidade: nave.quantidade - 1,
+      };
+    }
+    return nave;
+  });
+  this.setState({ carrinho: carrinhoAtual });
+};
+
+totalItens = () => {
+  return this.state.carrinho.reduce(
+    (total, item) => total + item.quantidade,
+    0
+  );
+};
+
+limparCarrinho = () => {
+  this.setState({ carrinho: [] });
+};
+
+render(){
+  if(this.state.paginaPrincipal){
+	
     return (
       <Corpo>
         <Tela>
          
-          <Header query={this.state.query} buscaNome={this.buscaNome}/>
-         
+          <Header 
+          paginaProdutos={this.state.paginaPrincipal}
+          paginaCarrinho={this.paginaCarrinho}
+          query={this.state.query} 
+          buscaNome={this.buscaNome}
+          totalItens={this.totalItens}/>   
           <Ordenacao />
          
           <Principal>
@@ -142,7 +236,6 @@ updateMaxPrice = (ev) => {
             <Filter>
 					<ImgTela src="https://pt.seaicons.com/wp-content/uploads/2015/11/filter-icon.png" />
 					<BotoesMnuVertical>Filtro</BotoesMnuVertical>
-
 				</Filter>
         
             <Filtro
@@ -158,17 +251,13 @@ updateMaxPrice = (ev) => {
             <PainelProdutos>
               {naves.filter(nave=>{
               return nave.name.toLowerCase().includes(this.state.query.toLowerCase())
-              })
-            .filter(naves => {
-               return this.state.minPrice === "" || naves.value >= this.state.minPrice
-            })
-            .filter(naves => {
-               return this.state.maxPrice === "" || naves.value <= this.state.maxPrice
-            })
-              .map((nave) =>
+              }).map((nave) =>
                 <Card name={nave.name}
+                    alt={nave.name}
                   imageUrl={nave.imageUrl}
-                  value={nave.value} />
+                  value={"R$"+nave.value} 
+                  key={nave.id}
+                  adicionarProduto={() => this.adicionarProduto(nave.id)}/>
               )}
 
             </PainelProdutos>
@@ -178,7 +267,27 @@ updateMaxPrice = (ev) => {
         </Tela>
       </Corpo>
     )
+  } else{
+    return(
+      <div>
+        <Header
+         paginaProdutos={this.state.paginaPrincipal}
+         paginaCarrinho={this.paginaCarrinho}/>
+      <Carrinho
+       carrinho={this.state.carrinho}
+       removerProduto={this.removerProduto}
+       adicionarQuantidade={this.adicionarQuantidade}
+       diminuirQuantidade={this.diminuirQuantidade}
+       limparCarrinho={this.limparCarrinho}
+       paginaCarrinho={this.paginaCarrinho}
+       totalItens={this.totalItens}/>
+       <Footer/>
+      </div>
+    )
   }
+}
+ 
 
 }
+
 
