@@ -105,12 +105,25 @@ const naves = [
 
 export default class App extends React.Component {
   state={
-        query:""
-        
+        query:"" ,
+          minPrice: "",
+          maxPrice: "", 
       }
 
 buscaNome=(e)=>{
   this.setState({query: e.target.value})
+}
+
+updateMinPrice = (ev) => {
+  this.setState({
+     minPrice: ev.target.value
+  })
+}
+
+updateMaxPrice = (ev) => {
+  this.setState({
+     maxPrice: ev.target.value
+  })
 }
 
   render() {
@@ -120,8 +133,6 @@ buscaNome=(e)=>{
         <Tela>
          
           <Header query={this.state.query} buscaNome={this.buscaNome}/>
-           
-         
          
           <Ordenacao />
          
@@ -131,16 +142,30 @@ buscaNome=(e)=>{
             <Filter>
 					<ImgTela src="https://pt.seaicons.com/wp-content/uploads/2015/11/filter-icon.png" />
 					<BotoesMnuVertical>Filtro</BotoesMnuVertical>
+
 				</Filter>
-            <Filtro>
-            </Filtro>
         
+            <Filtro
+            updateMinPrice={this.updateMinPrice}
+            updateMaxPrice={this.updateMaxPrice}
+            minPrice={this.state.minPrice}
+            maxPrice={this.state.maxPrice}
+                        />
+            
+
             </MnuVertical>
 
             <PainelProdutos>
               {naves.filter(nave=>{
               return nave.name.toLowerCase().includes(this.state.query.toLowerCase())
-              }).map((nave) =>
+              })
+            .filter(naves => {
+               return this.state.minPrice === "" || naves.value >= this.state.minPrice
+            })
+            .filter(naves => {
+               return this.state.maxPrice === "" || naves.value <= this.state.maxPrice
+            })
+              .map((nave) =>
                 <Card name={nave.name}
                   imageUrl={nave.imageUrl}
                   value={nave.value} />
