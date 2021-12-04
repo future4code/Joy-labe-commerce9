@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
+
 const Filtro = styled.summary`
 text-align: center;
     font-size: 1.2rem;
@@ -21,8 +23,10 @@ const Corpo = styled.div`
 display:flex;
 flex-direction:column;
 justify-content:start;
-align-items:center
-width:200px;`
+align-items:center;
+width:200px;
+`
+
 export default class App extends React.Component {
 
 	render() {
@@ -32,8 +36,8 @@ export default class App extends React.Component {
 				<Filtro>
 					
 				</Filtro>
-				<Inputfilter type="number" placeholder="Preço Mínimo" id="campoDeFiltroMinimo" />
-				<Inputfilter type="number" placeholder="Preço Máximo" id="campoDeFiltroMaximo" />
+				<Inputfilter type="number" placeholder="Preço Mínimo" id="campoDeFiltroMinimo" value={this.props.minPrice} onChange={this.props.precoMinimo}/>
+				<Inputfilter type="number" placeholder="Preço Máximo" id="campoDeFiltroMaximo" value2={this.props.maxPrice} onChange={this.props.precoMaximo}/>
 				<p>Limpar</p>
 			</Corpo>
 
