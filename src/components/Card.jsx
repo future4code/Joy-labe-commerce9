@@ -35,6 +35,9 @@ border-radius: 5px;
 border: 1px solid rgb(240, 194, 68);
 background-color: rgb(255, 255, 255);
 cursor:pointer;
+:hover {
+  background-color: #f0c244;
+}
 `
 export default class App extends React.Component {
 
@@ -47,7 +50,7 @@ render ()  {
                 alt={this.props.tituloNave} />
               <PainelProdutosh4>{this.props.name}</PainelProdutosh4>
               <PainelProdutosh3>{this.props.value}</PainelProdutosh3>
-              <BotaoAdicionarCarrinho>Adicionar ao Carrinho</BotaoAdicionarCarrinho>
+              <BotaoAdicionarCarrinho key={this.props.id} onClick={this.props.adicionarProduto}>Adicionar ao Carrinho</BotaoAdicionarCarrinho>
             </CardProduto>
 
         </div>
