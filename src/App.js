@@ -111,8 +111,6 @@ export default class App extends React.Component {
         paginaPrincipal:true,
         carrinho:[],
         naves:naves,
-          minPrice: "",
-          maxPrice: "", 
       }
       paginaCarrinho = () => {
         this.setState({ paginaPrincipal: !this.state.paginaPrincipal });
@@ -193,23 +191,8 @@ totalItens = () => {
 limparCarrinho = () => {
   this.setState({ carrinho: [] });
 };
-updateMinPrice = (ev) => {
-  this.setState({
-     minPrice: ev.target.value
-  })
-}
 
-updateMaxPrice = (ev) => {
-  if (ev.target.value !== "") {
-    this.setState({
-      precoMaximo: ev.target.value,
-    })
-  }else{
-    this.setState({
-      precoMaximo: Infinity,
-  })
-}
-}
+
   render() {
   
   if(this.state.paginaPrincipal){
@@ -233,12 +216,7 @@ updateMaxPrice = (ev) => {
 					<BotoesMnuVertical>Filtro</BotoesMnuVertical>
 				</Filter>
            
-             <Filtro
-             minPrice={this.state.minPrice}
-             maxPrice={this.state.maxPrice}
-             updateMinPrice={this.updateMinPrice}
-             updateMaxPrice={this.updateMaxPrice}
-                />
+             <Filtro/>
             
         
             </MnuVertical>
@@ -246,12 +224,7 @@ updateMaxPrice = (ev) => {
             <PainelProdutos>
               {naves.filter(nave=>{
               return nave.name.toLowerCase().includes(this.state.query.toLowerCase())
-              }).filter(naves => {
-                return this.state.minPrice === "" || naves.value >= this.state.minPrice
-             })
-             .filter(naves => {
-                return this.state.maxPrice === "" || naves.value <= this.state.maxPrice
-             }).map((nave) =>
+              }).map((nave) =>
                 <Card name={nave.name}
                     alt={nave.name}
                   imageUrl={nave.imageUrl}
