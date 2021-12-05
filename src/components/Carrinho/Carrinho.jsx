@@ -25,7 +25,7 @@ export default class Carrinho extends React.Component {
   valorTotalCarrinho = (listaNaves) => {
     let valorTotal = 0;
     for (let nave of listaNaves) {
-      valorTotal += nave.valor * nave.quantidade;
+      valorTotal += nave.value * nave.quantidade;
     }
     return valorTotal.toFixed(2);
   };
@@ -70,7 +70,7 @@ export default class Carrinho extends React.Component {
               </button>
             </h4>
           </AreaQuantidade>
-          <p>¢ {this.valorTotalProduto(nave.valor, nave.quantidade)}</p>
+          <p>¢ {this.valorTotalProduto(nave.value, nave.quantidade)}</p>
         </DescricaoProduto>
       </CardCompra>
     );
@@ -86,7 +86,7 @@ export default class Carrinho extends React.Component {
         </ItensResumoCompra>
         <ItensResumoCompra>
           <h2>Subtotal:</h2>
-          <p>¢ {this.valorTotalCarrinho(this.props.carrinho)}</p>
+          <p>R$ {this.valorTotalCarrinho(this.props.carrinho)}</p>
         </ItensResumoCompra>
         <ItensResumoCompra>
           <h2>Frete:</h2>
@@ -94,7 +94,7 @@ export default class Carrinho extends React.Component {
         </ItensResumoCompra>
         <ItensResumoCompra>
           <h1>Total:</h1>
-          <h1>¢ {this.valorTotalCarrinho(this.props.carrinho)}</h1>
+          <h1>R$ {this.valorTotalCarrinho(this.props.carrinho)}</h1>
         </ItensResumoCompra>
       
         <div>
