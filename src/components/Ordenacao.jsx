@@ -22,10 +22,16 @@ export default class App extends React.Component {
 		return (
 			<Order>
 				<Span>Ordenar:</Span>
-				<Select>
-					<option>Preço - Decrescente</option>
-					<option>Preço - Crescente</option>
-					<option>Populares</option>
+				<Select
+				name="order"
+				value={this.props.order}
+				onChange={this.props.updateOrder}
+			
+				>
+					<option value={-1}>Preço - Decrescente</option>
+					<option value={1}>Preço - Crescente</option>
+					
+					
 				</Select>
 
 			</Order>
