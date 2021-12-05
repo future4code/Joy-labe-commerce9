@@ -199,7 +199,7 @@ export default class App extends React.Component {
               this.setState({ carrinho: item });
             };
 
-// Funções para aumentar ou diminuir a quantidade de naves no carrinho
+
             adicionarQuantidade = (item) => {
               const carrinhoAtual = this.state.carrinho.map((nave) => {
                 if (item.id === nave.id) {
@@ -250,7 +250,16 @@ export default class App extends React.Component {
             query: ev.target.value
           })
         }
-
+        componentDidUpdate() {
+          localStorage.setItem("carrinho", JSON.stringify(this.state.carrinho));
+        }
+      
+        componentDidMount() {
+          const modificarCarrinho = localStorage.getItem("carrinho");
+          if (modificarCarrinho) {
+            this.setState({ carrinho: JSON.parse(modificarCarrinho) });
+          }
+        }
 
 render(){
   if(this.state.paginaPrincipal){
