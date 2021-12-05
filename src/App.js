@@ -70,7 +70,7 @@ const naves = [
   {
     id: 2,
     name: 'Nave Megalodon',
-    value: Number(59.9).toFixed(2),
+    value: Number(59.0).toFixed(2),
     imageUrl: 'http://astro-rockets.surge.sh/static/media/06_nave_megalodon.2e95d729.jpg',
     descricao:"Robusta, comporta grupos de até 50 pessoas confortavelmente!"
   },
@@ -102,119 +102,155 @@ const naves = [
     imageUrl: 'http://astro-rockets.surge.sh/static/media/04_foguete_blaster.45811de2.jpg',
     descricao:"Comporta até 5 passageiros em uma viagem extremamente veloz!"
   },
+  {
+    id: 7,
+    name: 'Nave Millenium Falcon',
+    value:Number(69.0).toFixed(2),
+    imageUrl: 'https://observatoriodocinema.uol.com.br/wp-content/uploads/2019/06/Millennium-Falcon.jpg',
+    descricao:"A Millennium Falcon é uma nave fictícia da franquia Star Wars."
+  },
+  {
+    id: 8,
+    name: 'Estação Espacial - Estrela da Morte',
+    value:Number(79.0).toFixed(2),
+    imageUrl: 'https://observatoriodocinema.uol.com.br/wp-content/uploads/2016/11/death-star-wallpaper-by-krischan.jpg',
+    descricao:"Estação espacial bélica criada pelo Império Galáctico"
+  },
 ]
 
 export default class App extends React.Component {
   state={
-        query:"" ,
- paginaPrincipal:true,
- carrinho:[],
-        naves:naves,
-          minPrice: "",
-          maxPrice: Infinity, 
+           query:"" ,
+           paginaPrincipal:true,
+           carrinho:[],
+           naves:naves,
+           minPrice: "",
+            maxPrice: Infinity, 
+            sortingParameter: "title",
+
+            order:1,
       }
 
-buscaNome=(e)=>{
-  this.setState({query: e.target.value})
-}
+            buscaNome=(e)=>{
+              this.setState({query: e.target.value})
+            }
 
-updateMinPrice = (ev) => {
-  this.setState({
-     minPrice: ev.target.value
-  })
-}
+            updateMinPrice = (ev) => {
+              this.setState({
+                minPrice: ev.target.value
+              })
+            }
 
-updateMaxPrice = (ev) => {
-  this.setState({
-     maxPrice: ev.target.value
-  })
-}
-limparFiltro = () => {
-  this.setState({
-    minPrice: "",
-    maxPrice: Infinity,
-  });
-};
+            updateMaxPrice = (ev) => {
+              this.setState({
+                maxPrice: ev.target.value
+              })
+            }
+            limparFiltro = () => {
+              this.setState({
+                minPrice: "",
+                maxPrice: "",
+              });
+            };
+            updateSortingParameter = (ev) => {
+              this.setState({
+                sortingParameter: ev.target.value
+              })
+            }
+            paginaCarrinho = () => {
+            this.setState({ paginaPrincipal: !this.state.paginaPrincipal });
+            };
+                  
+            buscaNome=(e)=>{
+              this.setState({query: e.target.value})
+            }
+            adicionarProduto = (id) => {
+              const itemCarrinho = this.state.carrinho.find(
+                (nave) => id === nave.id
+              );
+              if (itemCarrinho) {
+                const novoCarrinho = this.state.carrinho.map((nave) => {
+                  if (id === nave.id) {
+                    return {
+                      ...nave,
+                      quantidade: nave.quantidade + 1,
+                    };
+                  }
+                  return nave;
+                });
+                this.setState({ carrinho: novoCarrinho });
+              } else {
+                const itemParaAdicionar = this.state.naves.find(
+                  (nave) => id === nave.id
+                );
+                const carrinhoAtual = [
+                  ...this.state.carrinho,
+                  { ...itemParaAdicionar, quantidade: 1 },
+                ];
+                this.setState({ carrinho: carrinhoAtual });
+              }
+            };
 
-      paginaCarrinho = () => {
-        this.setState({ paginaPrincipal: !this.state.paginaPrincipal });
-      };
-      
-buscaNome=(e)=>{
-  this.setState({query: e.target.value})
-}
-adicionarProduto = (id) => {
-  const itemCarrinho = this.state.carrinho.find(
-    (nave) => id === nave.id
-  );
-  if (itemCarrinho) {
-    const novoCarrinho = this.state.carrinho.map((nave) => {
-      if (id === nave.id) {
-        return {
-          ...nave,
-          quantidade: nave.quantidade + 1,
-        };
-      }
-      return nave;
-    });
-    this.setState({ carrinho: novoCarrinho });
-  } else {
-    const itemParaAdicionar = this.state.naves.find(
-      (nave) => id === nave.id
-    );
-    const carrinhoAtual = [
-      ...this.state.carrinho,
-      { ...itemParaAdicionar, quantidade: 1 },
-    ];
-    this.setState({ carrinho: carrinhoAtual });
-  }
-};
-
-removerProduto = (id) => {
-  const retirarItem = [...this.state.carrinho];
-  const item = retirarItem.filter((nave) => {
-    return nave.id !== id;
-  });
-  this.setState({ carrinho: item });
-};
+            removerProduto = (id) => {
+              const retirarItem = [...this.state.carrinho];
+              const item = retirarItem.filter((nave) => {
+                return nave.id !== id;
+              });
+              this.setState({ carrinho: item });
+            };
 
 // Funções para aumentar ou diminuir a quantidade de naves no carrinho
-adicionarQuantidade = (item) => {
-  const carrinhoAtual = this.state.carrinho.map((nave) => {
-    if (item.id === nave.id) {
-      return {
-        ...item,
-        quantidade: nave.quantidade + 1,
-      };
-    }
-    return nave;
-  });
-  this.setState({ carrinho: carrinhoAtual });
-};
+            adicionarQuantidade = (item) => {
+              const carrinhoAtual = this.state.carrinho.map((nave) => {
+                if (item.id === nave.id) {
+                  return {
+                    ...item,
+                    quantidade: nave.quantidade + 1,
+                  };
+                }
+                return nave;
+              });
+              this.setState({ carrinho: carrinhoAtual });
+            };
 
-diminuirQuantidade = (item) => {
-  const carrinhoAtual = this.state.carrinho.map((nave) => {
-    if (item.id === nave.id && nave.quantidade > 1) {
-      return {
-        ...item,
-        quantidade: nave.quantidade - 1,
-      };
-    }
-    return nave;
-  });
-  this.setState({ carrinho: carrinhoAtual });
-};
+            diminuirQuantidade = (item) => {
+              const carrinhoAtual = this.state.carrinho.map((nave) => {
+                if (item.id === nave.id && nave.quantidade > 1) {
+                  return {
+                    ...item,
+                    quantidade: nave.quantidade - 1,
+                  };
+                }
+                return nave;
+              });
+              this.setState({ carrinho: carrinhoAtual });
+            };
 
-totalItens = () => {
-  return this.state.carrinho.reduce(
-    (total, item) => total + item.quantidade,
-    0
-  );
-};
+            totalItens = () => {
+              return this.state.carrinho.reduce(
+                (total, item) => total + item.quantidade,
+                0
+              );
+            };
 
-limparCarrinho = () => {
-  this.setState({ carrinho: [] });
-};
+            limparCarrinho = () => {
+              this.setState({ carrinho: [] });
+            };
+
+// Funções para ordenação crescente/decrescente
+
+        updateOrder= (ev) => {
+          this.setState({ order:ev.target.value });
+        };
+
+      
+
+        updateQuery = (ev) => {
+          this.setState({
+            query: ev.target.value
+          })
+        }
+
 
 render(){
   if(this.state.paginaPrincipal){
@@ -228,8 +264,16 @@ render(){
           paginaCarrinho={this.paginaCarrinho}
           query={this.state.query} 
           buscaNome={this.buscaNome}
-          totalItens={this.totalItens}/>   
-          <Ordenacao />
+          totalItens={this.totalItens}/> 
+
+
+          <Ordenacao 
+                 
+          updateOrder={this.updateOrder}
+          order={this.state.order}      
+          updateSortingParameter={this.updateSortingParameter}
+
+          />
          
           <Principal>
             <MnuVertical>    
@@ -258,7 +302,16 @@ render(){
              })
              .filter(nave => {
                 return this.state.maxPrice === "" || nave.value <= this.state.maxPrice
-             }).map((nave) =>
+
+                
+             }).sort((currentShip, nextShip) => {
+              switch (this.state.sortingParameter) {  
+              
+                 default:
+                    return this.state.order * (currentShip.value - nextShip.value)
+              }
+              })
+              .map((nave) =>
                 <Card name={nave.name}
                     alt={nave.name}
                   imageUrl={nave.imageUrl}
