@@ -7,8 +7,8 @@ Loja focada em venda de naves, foguetes e ônibus espaciais, pode ser acessado e
  - Heber Souza - filtros.
  - Vinícius Lussani Toigo - Ordenação e estilização.
 ### Tecnologias:
--React
--Styled Components
+ - React
+ - Styled Components
 
 
 ### Imagens
