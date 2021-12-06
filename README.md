@@ -3,9 +3,9 @@
 Loja focada em venda de naves, foguetes e ônibus espaciais, pode ser acessado em [acessar ao LabEcommerce aqui](https://impolite-song.surge.sh/)
 
 ### Dev's:
-  -Guilherme de Oliveira Barros
-  -Heber Souza
-  -Vinícius Lussani Toigo
+ - Luiza - página produtos e estilização.
+ - Ruana - página produtos e filtros.
+ - Stefani - página produtos e carrinho de compras.
 ### Tecnologias:
 -React
 -Styled Components
