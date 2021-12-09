@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: black;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.tela-inteira {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.tela-inteira h1{
+  margin-left: 16%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  
+}
+
+.tela-inteira img{
+width: 35px;
+
+
+
+}
+header {
+  background-color: rgb(60, 19, 153);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 0;
+  height: 10%;
+}
+
+main {
+  min-height: 80%;
+  display: flex;
+}
+
+.menu-vertical {
+  flex-basis: 200px;
+  border-right-style: solid;
+  border-right-width: thin;
+  border-radius: 15px;
+}
+
+.botoes-menu-vertical {
+  list-style-type: none;
+  color:azure;
+  
+}
+
+.painel-de-produtos {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 10px;
+  column-gap: 10px;
+  color: azure;
+  
+}
+
+.painel-de-produtos h3 {
+display: flex;
+flex-direction: column;
+align-items: center;
+
+
+}
+
+.painel-de-produtos h4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+  
+  }
+.box-pagina-principal {
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  grid-template-columns: 1fr;
+  border-style: solid;
+  border-width: thin;
+  align-items: start;
+  justify-items: stretch;
+}
+
+footer {
+  background: rgb(60, 19, 153);
   color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 0 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.box-pagina-principal > img {
+  width: 100%;
+  height: 200px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h4 {
+  margin-left: 20px;
 }
